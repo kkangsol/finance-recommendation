@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Finance Recommendation</title>
+    <title>홈</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>서버 연결 성공!</h1>
-<p>한동의 금융상품 추천 서비스 프로젝트 시작! 🚀</p>
+<body class="bg-gray-50 flex flex-col items-center justify-center min-h-screen p-6">
+
+
+<!-- 상단 작은 버튼 -->
+<div class="absolute top-6 right-6 space-x-3">
+    <a th:href="@{/login}" class="px-4 py-2 bg-gray-200 rounded-md shadow hover:bg-gray-300">로그인</a>
+    <a th:href="@{/signup}" class="px-4 py-2 bg-gray-200 rounded-md shadow hover:bg-gray-300">회원가입</a>
+    <a th:href="@{/mypage}" class="px-4 py-2 bg-gray-200 rounded-md shadow hover:bg-gray-300">마이페이지</a>
+</div>
+
+<!-- 중앙 메인 버튼 -->
+<div class="mt-32 text-center">
+    <h1 class="text-3xl font-bold mb-10">맞춤형 금융상품 추천 서비스</h1>
+    <a th:href="@{/user-form}" class="px-8 py-4 bg-blue-600 text-white text-xl font-bold rounded-2xl shadow-lg hover:bg-blue-700 transition">
+        맞춤 금융상품 추천받기
+    </a>
+</div>
+
 </body>
 </html>

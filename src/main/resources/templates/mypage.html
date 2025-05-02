@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<body>
+<!-- 추가: 홈으로 버튼 -->
+<div style="position: absolute; top: 20px; right: 20px;">
+    <a href="/" style="padding: 8px 12px; background-color: #e5e7eb; border-radius: 6px; text-decoration: none;">홈으로</a>
+</div>
+
+
+<h2 th:text="|${user.name}님, 환영합니다!|">[이름]님, 환영합니다!</h2>
+
+<ul>
+    <li><strong>이름:</strong> <span th:text="${user.name}">[이름]</span></li>
+    <li><strong>전화번호:</strong> <span th:text="${user.phoneNumber}">[전화번호]</span></li>
+    <li><strong>가입일:</strong>
+        <span th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm')}">[가입일시]</span>
+    </li>
+</ul>
+
+<form action="/logout" method="get">
+    <button type="submit">로그아웃</button>
+</form>
+
+</body>
+</html>

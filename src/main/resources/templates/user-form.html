@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>맞춤 금융상품 추천</title>
+    <script>
+        function showForm(category) {
+            document.getElementById("categoryInput").value = category;
+            document.getElementById("deposit-form").style.display = (category === 'DEPOSIT') ? 'block' : 'none';
+            document.getElementById("loan-form").style.display = (category === 'LOAN') ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+
+<div style="position: absolute; top: 20px; right: 20px;">
+    <a href="/" style="padding: 8px 12px; background-color: #e5e7eb; border-radius: 6px; text-decoration: none;">홈으로</a>
+</div>
+
+
+<h1>맞춤 금융상품 추천받기</h1>
+
+<!-- 카테고리 선택 버튼 -->
+<div>
+    <button type="button" onclick="showForm('DEPOSIT')">예금 상품 추천</button>
+    <button type="button" onclick="showForm('LOAN')">대출 상품 추천</button>
+</div>
+
+<!-- 공통 숨겨진 category input -->
+<form action="/user-form" method="post">
+    <input type="hidden" name="category" id="categoryInput"/>
+
+    <!-- 예금 폼 -->
+    <div id="deposit-form" style="display: none; margin-top: 20px;">
+        <h3>예금 정보 입력</h3>
+
+        <label>직업:
+            <select name="job" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="사무직">사무직</option>
+                <option value="전문직">전문직</option>
+                <option value="서비스직">서비스직</option>
+                <option value="학생">학생</option>
+                <option value="무직">무직</option>
+                <option value="기타">기타</option>
+            </select>
+        </label><br/>
+
+        <label>연소득:
+            <input type="text" name="annualIncome" oninput="formatCurrency(this)" onblur="getRawNumber(this)" required />
+        </label><br/>
+
+        <label>예치금액:
+            <input type="text" name="depositAmount" oninput="formatCurrency(this)" onblur="getRawNumber(this)" required />
+        </label><br/>
+
+        <label>예치기간 (개월): <input type="number" name="depositPeriod" min="1" required /></label><br/>
+
+        <label>이자지급방식: <span style="font-size: 0.9em; color: gray;">* 한 가지 이상 선택</span></label><br/>
+        <label><input type="checkbox" name="interestPaymentType" value="단리"> 단리</label>
+        <label><input type="checkbox" name="interestPaymentType" value="복리"> 복리</label><br/>
+
+        <label>저축 목적:
+            <select name="savingPurpose" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="목돈 마련">목돈 마련</option>
+                <option value="결혼 자금">결혼 자금</option>
+                <option value="주택 구입">주택 구입</option>
+                <option value="노후 준비">노후 준비</option>
+                <option value="자녀 교육비">자녀 교육비</option>
+                <option value="기타">기타</option>
+            </select>
+        </label><br/>
+
+        <button type="submit">추천받기</button>
+    </div>
+
+    <!-- 대출 폼 -->
+    <div id="loan-form" style="display: none; margin-top: 20px;">
+        <h3>대출 정보 입력</h3>
+
+        <label>직업:
+            <select name="job" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="사무직">사무직</option>
+                <option value="전문직">전문직</option>
+                <option value="서비스직">서비스직</option>
+                <option value="학생">학생</option>
+                <option value="무직">무직</option>
+                <option value="기타">기타</option>
+            </select>
+        </label><br/>
+
+        <label>연소득:
+            <input type="text" name="annualIncome" oninput="formatCurrency(this)" onblur="getRawNumber(this)" required />
+        </label><br/>
+
+        <label>대출금액:
+            <input type="text" name="loanAmount" oninput="formatCurrency(this)" onblur="getRawNumber(this)" required />
+        </label><br/>
+
+        <label>신용 점수:
+            <select name="creditScore" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="800">800점 이상</option>
+                <option value="750">750 ~ 799</option>
+                <option value="700">700 ~ 749</option>
+                <option value="650">650 ~ 699</option>
+                <option value="600">600 ~ 649</option>
+                <option value="500">600 미만</option>
+            </select>
+        </label><br/>
+
+        <label>대출 목적:
+            <select name="loanPurpose" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="생활비">생활비</option>
+                <option value="사업 자금">사업 자금</option>
+                <option value="학자금">학자금</option>
+                <option value="주택 자금">주택 자금</option>
+                <option value="기타">기타</option>
+            </select>
+        </label><br/>
+
+        <button type="submit">추천받기</button>
+    </div>
+</form>
+<script>
+    function formatCurrency(input) {
+        // 숫자만 추출
+        let value = input.value.replace(/,/g, '').replace(/\D/g, '');
+        if (value === '') {
+            input.value = '';
+            return;
+        }
+        // 천단위 쉼표 붙이기
+        input.value = new Intl.NumberFormat().format(value);
+    }
+
+    function getRawNumber(input) {
+        input.value = input.value.replace(/,/g, '');
+    }
+</script>
+
+
+
+</body>
+</html>
