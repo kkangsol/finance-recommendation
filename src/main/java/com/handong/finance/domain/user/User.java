@@ -24,6 +24,18 @@ public class User {
     private String password;
     private String name;
     private String phoneNumber;
+
+
+    @Column(nullable = false)
+    private Integer age;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Gender gender;
+
+    @Column(nullable = false)
+    private Boolean isBusinessOwner;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -33,10 +45,13 @@ public class User {
     // 초기화하지않으면 NPE 위험이 있음 (ex : .size())
 
 
-    public User(String username, String password, String name, String phoneNumber) {
+    public User(String username, String password, String name, String phoneNumber, Integer age, Gender gender, boolean isBusinessOwner) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.gender = gender;
+        this.isBusinessOwner = isBusinessOwner;
     }
 }

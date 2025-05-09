@@ -37,6 +37,9 @@ public class DepositProductResponse {
             @JsonProperty("join_deny")
             private int joinDeny;  //가입제한(1:x / 2:서민 / 3:제한)
 
+            @JsonProperty("join_member")
+            private String joinMember;
+
             @JsonProperty("etc_note")
             private String etcNote; //기타 유의사항
 
@@ -56,7 +59,7 @@ public class DepositProductResponse {
 
     }
 
-    List<DepositProduct> toDepositProductList(){
+    public List<DepositProduct> toDepositProductList(){
         List<DepositProduct> depositProducts = new ArrayList<>();
         for(Result.BaseList p : result.baseList){
             DepositProduct product = new DepositProduct(
@@ -66,6 +69,7 @@ public class DepositProductResponse {
                     p.getInterestRateDue(),
                     p.getSpecialCondition(),
                     JoinDeny.fromCode(p.getJoinDeny()),
+                    p.getJoinMember(),
                     p.getEtcNote(),
                     p.getMaxLimit(),
                     p.getRateType(),

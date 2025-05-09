@@ -5,17 +5,28 @@
     <title>마이페이지</title>
 </head>
 <body>
-<!-- 추가: 홈으로 버튼 -->
+
+<!-- 홈으로 버튼 -->
 <div style="position: absolute; top: 20px; right: 20px;">
     <a href="/" style="padding: 8px 12px; background-color: #e5e7eb; border-radius: 6px; text-decoration: none;">홈으로</a>
 </div>
-
 
 <h2 th:text="|${user.name}님, 환영합니다!|">[이름]님, 환영합니다!</h2>
 
 <ul>
     <li><strong>이름:</strong> <span th:text="${user.name}">[이름]</span></li>
     <li><strong>전화번호:</strong> <span th:text="${user.phoneNumber}">[전화번호]</span></li>
+    <li><strong>나이:</strong> <span th:text="${user.age}">[나이]</span></li>
+    <li><strong>성별:</strong>
+        <span th:switch="${user.gender}">
+            <span th:case="'MALE'">남성</span>
+            <span th:case="'FEMALE'">여성</span>
+            <span th:case="*">기타</span>
+        </span>
+    </li>
+    <li><strong>사업자 여부:</strong>
+        <span th:text="${user.isBusinessOwner} ? '개인사업자' : '개인'">[사업자여부]</span>
+    </li>
     <li><strong>가입일:</strong>
         <span th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd HH:mm')}">[가입일시]</span>
     </li>

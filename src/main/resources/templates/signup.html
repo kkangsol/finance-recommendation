@@ -6,11 +6,10 @@
 </head>
 <body>
 
-<!-- 추가: 홈으로 버튼 -->
+<!-- 홈으로 버튼 -->
 <div style="position: absolute; top: 20px; right: 20px;">
     <a href="/" style="padding: 8px 12px; background-color: #e5e7eb; border-radius: 6px; text-decoration: none;">홈으로</a>
 </div>
-
 
 <h1>회원가입</h1>
 
@@ -35,6 +34,21 @@
         <button type="button" onclick="checkPhoneNumber()">중복확인</button>
         <span id="phoneNumberCheckResult"></span>
     </div>
+    <div>
+        <label>나이: </label>
+        <input type="number" name="age" min="1" max="100" required />
+    </div>
+    <div>
+        <label>성별: </label>
+        <input type="radio" name="gender" value="MALE" required /> 남성
+        <input type="radio" name="gender" value="FEMALE" /> 여성
+    </div>
+    <div>
+        <label>사업자 여부: </label>
+        <input type="radio" name="isBusinessOwner" value="false" required /> 개인
+        <input type="radio" name="isBusinessOwner" value="true" /> 개인사업자
+    </div>
+
     <button type="submit">회원가입</button>
 </form>
 
@@ -53,14 +67,11 @@
 
         const response = await fetch("/api/check-username", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username: username })
         });
 
         const result = await response.json();
-
         if (result.isAvailable) {
             resultSpan.textContent = "✅ 사용 가능한 아이디입니다.";
             resultSpan.style.color = "green";
@@ -83,14 +94,11 @@
 
         const response = await fetch("/api/check-phoneNumber", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ phoneNumber: phoneNumber })
         });
 
         const result = await response.json();
-
         if (result.isAvailable) {
             resultSpan.textContent = "✅ 사용 가능한 번호입니다.";
             resultSpan.style.color = "green";

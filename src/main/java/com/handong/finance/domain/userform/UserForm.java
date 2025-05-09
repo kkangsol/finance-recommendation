@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "user_form")
 public class UserForm {
 
     //예금, 대출 공통

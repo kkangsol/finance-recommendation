@@ -12,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class DepositProductApiClient {
 
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final RestTemplate restTemplate;
+    private final ObjectMapper objectMapper;
 
     private final String apiKey = "77af6e68e10b76c0830f341f8aee176b";
     private final List<String> finGrpCodes = List.of("020000", "030200", "030300", "050000", "060000");
@@ -30,10 +31,11 @@ public class DepositProductApiClient {
             try {
                 String json = restTemplate.getForObject(url, String.class);
                 DepositProductResponse response = objectMapper.readValue(json, DepositProductResponse.class);
-                result.addAll(response);
+                result.addAll(response.toDepositProductList());
             }catch (Exception e){
-                System.out.println("API호출실패 : " + e.getMessage());
+                System.out.println("API호출실패 : (code = " + code + ") : " + e.getMessage());
             }
         }
+        return result;
     }
 }

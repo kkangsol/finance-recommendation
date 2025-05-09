@@ -23,10 +23,12 @@ public class RecommendController {
     private final UserFormService userFormService;
     private final RecommendService recommendService;
 
-    /*@GetMapping
+   @GetMapping("/recommend/deposit")
     public String recommendDeposit(HttpSession session, Model model){
         User loginUser = (User) session.getAttribute("loginUser");
         UserForm userForm = userFormService.getUserForm(loginUser).orElseThrow(() -> new IllegalArgumentException("입력값이 없습니다."));
-        List<DepositProduct> = recommendService.recommendDepositFor(userForm);
-    }*/
+        List<DepositProduct> depositProductList =recommendService.recommendDepositProducts(userForm);
+        model.addAttribute("depositProductList",depositProductList);
+        return("/recommend/deposit");
+    }
 }

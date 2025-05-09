@@ -23,7 +23,10 @@ public class UserService {
                 request.getUsername(),
                 encodedPassword,
                 request.getName(),
-                request.getPhoneNumber()
+                request.getPhoneNumber(),
+                request.getAge(),
+                request.getGender(),
+                request.getIsBusinessOwner()
         ));
     }
 }

@@ -14,6 +14,7 @@ public class DepositProduct {
     private String interestRateDue; //만기시 금리
     private String specialCondition;    //우대조건
     private JoinDeny joinDeny;  //가입제한(1:x / 2:서민 / 3:제한)
+    private String joinMember;
     private String etcNote; //기타 유의사항
     private BigDecimal maxLimit;  //최고 한도
     private String rateType;    //저축금리유형명(단,복리)
