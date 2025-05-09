@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,31 +33,32 @@ public class UserForm {
 
     private Category category;
     private String job;
-    private long annualIncome;
+    private BigDecimal annualIncome;
+    private int creditScore;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     //예금만
-    private long depositAmount;
+    private BigDecimal depositAmount;
     private int depositPeriod;
     private String interestPaymentType;
     private String savingPurpose;
 
     //대출만
-    private long loanAmount;
-    private int creditScore;
+    private BigDecimal loanAmount;
     private String loanPurpose;
 
     // 예금 생성자
     public UserForm(User user, Category category, String job,
-                    long annualIncome, long depositAmount,
+                    BigDecimal annualIncome,int creditScore, BigDecimal depositAmount,
                     int depositPeriod, String interestPaymentType, String savingPurpose) {
         setUser(user);
         this.category = category;
         this.job = job;
         this.annualIncome = annualIncome;
+        this.creditScore = creditScore;
         this.depositAmount = depositAmount;
         this.depositPeriod = depositPeriod;
         this.interestPaymentType = interestPaymentType;
@@ -65,7 +67,7 @@ public class UserForm {
 
     // 대출 생성자
     public UserForm(User user, Category category, String job,
-                    long annualIncome, long loanAmount,
+                    BigDecimal annualIncome, BigDecimal loanAmount,
                     int creditScore, String loanPurpose) {
         setUser(user);
         this.category = category;
